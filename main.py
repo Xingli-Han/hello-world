@@ -174,13 +174,12 @@ EPISODES = 50000
 # it uses Neural Network to approximate q function
 # and prioritized experience replay memory & target q network
 class DQNAgent():
-    def __init__(self, state_size, action_size):
+    def __init__(self,action_size):
         # if you want to see Cartpole learning, then change to True
         self.render = False
         self.load_model = False
 
         # get size of state and action
-        self.state_size = state_size
         self.action_size = action_size
 
         # These are hyper parameters for the DQN
@@ -313,9 +312,9 @@ class DQNAgent():
 env = gym.make('Breakout-v0')
 #state_size = env.observation_space.shape[0]
 action_size = env.action_space.n
-model = DQN(state_size, action_size)
+model = DQN(action_size)
 
-agent = DQNAgent(state_size, action_size)
+agent = DQNAgent(action_size)
 scores, episodes = [], []
 
 for e in range(EPISODES):
