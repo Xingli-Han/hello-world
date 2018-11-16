@@ -151,7 +151,7 @@ class DQN(nn.Module):
 '''
 
 class DQN(nn.Module):
-    def __init__(self, state_size, action_size):
+    def __init__(self, action_size):
         super(DQN, self).__init__()
         self.conv1 = nn.Conv2d(1, 16, kernel_size=8, stride=4)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=4, stride=2)
@@ -205,9 +205,9 @@ class DQNAgent():
         model_ft.fc = nn.Linear(num_ftrs, action_size)
         '''
         # create main model and target model
-        self.model = DQN(state_size, action_size)
+        self.model = DQN(action_size)
         self.model.apply(self.weights_init)
-        self.target_model = DQN(state_size, action_size)
+        self.target_model = DQN(action_size)
         self.optimizer = optim.Adam(self.model.parameters(),
                                     lr=self.learning_rate)
 
