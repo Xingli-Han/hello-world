@@ -168,7 +168,7 @@ class DQN(nn.Module):
         x = self.fc2(x)
         return x
 
-EPISODES = 500
+EPISODES = 50000
 
 # DQN Agent for the Cartpole
 # it uses Neural Network to approximate q function
@@ -189,7 +189,7 @@ class DQNAgent():
         self.memory_size = 20000
         self.epsilon = 1.0
         self.epsilon_min = 0.01
-        self.explore_step = 5000
+        self.explore_step = 50000
         self.epsilon_decay = (self.epsilon - self.epsilon_min) / self.explore_step
         self.batch_size = 64
         self.train_start = 1000
@@ -371,13 +371,4 @@ for e in range(EPISODES):
                 torch.save(agent.model, "./save_model/cartpole_dqn")
                 sys.exit()
 
-# 运行这个cell，可以将图片保存到本地...
-from google.colab import files
-files.download("cartpole_dqn.png")
-
-model_ft = models.vgg19(pretrained=True)
-print(model_ft)
-num_ftrs = model_ft.fc.in_features
-model_ft.fc = nn.Linear(num_ftrs, 2)
-num_ftrs = model_ft.fc.in_features
 
