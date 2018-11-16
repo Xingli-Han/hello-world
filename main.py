@@ -359,8 +359,6 @@ for e in range(EPISODES):
             score = score if score == 500 else score + 10
             scores.append(score)
             episodes.append(e)
-            pylab.plot(episodes, scores, 'b')
-            pylab.savefig("cartpole_dqn.png")
             print("episode:", e, "  score:", score, "  memory length:",
                   agent.memory.tree.n_entries, "  epsilon:", agent.epsilon)
 
