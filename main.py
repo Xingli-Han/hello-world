@@ -7,16 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/19PB_QHp_-sdef9y3KmXXapTd6FCO3-m1
 """
 
-#'''
-!pip install gym
-!pip install numpy
-!pip install gym[atari]
-!pip install torch
-!pip install torchvision
-!pip install tqdm
-!pip install Pillow
-!pip install opencv-python
-#'''
 
 import random
 import numpy as np
