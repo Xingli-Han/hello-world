@@ -341,15 +341,15 @@ class DQNAgent():
         self.action_size = action_size
 
         # These are hyper parameters for the DQN
-        self.discount_factor = 0.8
-        self.learning_rate = 0.00002
+        self.discount_factor = 0.99
+        self.learning_rate = 0.00025
         self.memory_size = 300000
         self.epsilon = 1.0 
-        self.epsilon_min = 0.2
-        self.explore_step =200000 #5000*20
+        self.epsilon_min = 0.05
+        self.explore_step =300000 #5000*20
         self.epsilon_decay = (self.epsilon - self.epsilon_min) / self.explore_step
         self.batch_size = 32
-        self.train_start = 100000
+        self.train_start = 50000
 
         # create prioritized replay memory using SumTree
         self.memory = Memory(self.memory_size)    
@@ -831,7 +831,7 @@ class Queue:
         sequence = np.concatenate(mid_queue,axis=0)
         return sequence
 
-env = gym.make('PongNoFrameskip-v4')
+env = gym.make('BreakoutNoFrameskip-v4')
 f = open("log.txt", "a")
 f.write("\n====================\n")
 f.close()
@@ -918,8 +918,8 @@ for e in range(EPISODES):
             scores.append(score)
             ave_scores += score
             episodes.append(e)
-            pylab.plot(episodes, scores, 'b')
-            pylab.savefig("cartpole_dqn.png")
+            #pylab.plot(episodes, scores, 'b')
+            #pylab.savefig("cartpole_dqn.png")
             np.savetxt('4_frame_priority_deepmindnet_pong', scores, fmt='%.2f')
             print_counter += 1
             if print_counter == 10:
@@ -936,6 +936,6 @@ for e in range(EPISODES):
 
             # if the mean of scores of last 10 episode is bigger than 10
             # stop training
-            if np.mean(scores[-min(10, len(scores)):]) > 18:
+            if np.mean(scores[-min(10, len(scores)):]) > 350:
                 torch.save(agent.model, "1_frame_Pong_raw_pixel_linear_ultimate")
                 sys.exit()
